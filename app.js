@@ -1,8 +1,6 @@
 const editName1 = document.querySelector('.first-edit');
 const editName2 = document.querySelector('.second-edit');
 
-
-
 const player1 = {
     playerName: document.querySelector('#name1'),
     score: 0,
@@ -29,6 +27,8 @@ editName2.addEventListener ('click', function () {
 })
 
 const thCurrentSet = document.querySelectorAll('.currentSet')
+const p1TdCurrentSet = document.querySelectorAll('.p1currentSet')
+const p2TdCurrentSet = document.querySelectorAll('.p2currentSet')
 const resetButton = document.querySelector('#reset');
 const winningSets = document.querySelector('#playto');
 
@@ -38,6 +38,7 @@ let setNumber = 0;
 
 winningSets.addEventListener('change', function () {
     winningGoal = parseInt(this.value);
+    reset();
 })
 
 
@@ -73,6 +74,8 @@ function updateScores(player, opponent) {
                     opponent.playerName.classList.add('is-danger');
                 }
             }
+        } else if (player.setScore === 6 && opponent.setScore === 6) {
+            player.display.textContent = player.score;
         } else if (player.score === 1) {
             player.display.textContent = 15;
         } else if (player.score === 2) {
@@ -87,77 +90,40 @@ function updateScores(player, opponent) {
             opponent.display.textContent = '';
         } 
     }
-    console.log(setNumber);
+}
+
+function reset() {
+    isMatchOver = false;
+    setNumber = 0;
+    for (let i = 0; i < 5; i++) {
+        p1TdCurrentSet[i].textContent = 0;
+        p2TdCurrentSet[i].textContent = 0;
+    }
+    for (let i = 0; i < 4; i++) {
+        p1TdCurrentSet[i + 1].classList.add('hidden');
+        p2TdCurrentSet[i + 1].classList.add('hidden');
+        thCurrentSet[i + 1].classList.add('hidden');
+    }
+    for(let p of [player1, player2]) {
+        p.score = 0;
+        p.setScore = 0;
+        p.totalSets = 0;
+        p.display.textContent = 0;
+        p.display.classList.remove('bold');
+        p.button.disabled = false;
+        p.playerName.classList.remove('is-success');
+        p.playerName.classList.remove('is-danger');
+    }
 }
 
 player1.button.addEventListener('click', function () {
     updateScores(player1, player2);
-    console.log(player1.setScore);
-    console.log(player1.totalSets);
-    console.dir(player1.currentSet);
 } )
 
 player2.button.addEventListener('click', function () {
     updateScores(player2, player1);
 } )
 
-
-// **************************STARTO KOD*************************************
-
-// const player1 = {
-//     score: 0,
-//     button: document.querySelector('#p1Button'),
-//     display: document.querySelector('#p1Display'),
-// }
-// const player2 = {
-//     score: 0,
-//     button: document.querySelector('#p2Button'),
-//     display: document.querySelector('#p2Display'),
-// }
+resetButton.addEventListener('click', reset);
 
 
-// const resetButton = document.querySelector('#reset');
-// const winningScoreSelect = document.querySelector('#playto');
-
-
-// let winningScore = 2;
-// let isGameOver = false;
-
-// function updateScores(player, opponent) {
-//     if(!isGameOver) {
-//         player.score ++;
-//         if (player.score === winningScore) {
-//             isGameOver = true;
-//             player.display.classList.add('has-text-success');
-//             opponent.display.classList.add('has-text-danger');
-//             player.button.disabled = true;
-//             opponent.button.disabled = true;
-//     }
-//     player.display.textContent = player.score;
-//     }
-// }
-
-// player1.button.addEventListener('click', function () {
-//     updateScores(player1, player2);
-// } )
-
-// player2.button.addEventListener('click', function () {
-//     updateScores(player2, player1);
-// } )
-
-// winningScoreSelect.addEventListener('change', function () {
-//     winningScore = parseInt(this.value);
-//     reset();
-// })
-
-// resetButton.addEventListener('click', reset)
-
-// function reset() {
-//     isGameOver = false;
-//     for(let p of [player1, player2]) {
-//         p.score = 0;
-//         p.display.textContent = 0;
-//         p.display.classList.remove('has-text-success', 'has-text-danger');
-//         p.button.disabled = false;
-//     }
-// }
