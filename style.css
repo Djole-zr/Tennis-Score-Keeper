@@ -1,0 +1,17 @@
+.edit-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.edit {
+    padding: 0 !important;
+    border: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.bold {
+    font-weight: bold;
+}
