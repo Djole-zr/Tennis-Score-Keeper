@@ -1,17 +1,10 @@
-const name1 = document.querySelector('#name1');
-const name2 = document.querySelector('#name2');
 const editName1 = document.querySelector('.first-edit');
 const editName2 = document.querySelector('.second-edit');
 
-editName1.addEventListener ('click', function () {
-    name1.textContent = prompt('Enter player name:');
-})
-editName2.addEventListener ('click', function () {
-    name2.textContent = prompt('Enter player name:');
-})
 
 
 const player1 = {
+    playerName: document.querySelector('#name1'),
     score: 0,
     setScore: 0,
     totalSets: 0,
@@ -20,6 +13,7 @@ const player1 = {
 }
 
 const player2 = {
+    playerName: document.querySelector('#name2'),
     score: 0,
     setScore: 0,
     totalSets: 0,
@@ -27,11 +21,20 @@ const player2 = {
     display: document.querySelector('#p2DisplayScore'),
 }
 
+editName1.addEventListener ('click', function () {
+    player1.playerName.textContent = prompt('Enter player name:');
+})
+editName2.addEventListener ('click', function () {
+    player2.playerName.textContent = prompt('Enter player name:');
+})
+
+const thCurrentSet = document.querySelectorAll('.currentSet')
 const resetButton = document.querySelector('#reset');
 const winningSets = document.querySelector('#playto');
 
 let winningGoal = 2;
 let isMatchOver = false;
+let setNumber = 0;
 
 winningSets.addEventListener('change', function () {
     winningGoal = parseInt(this.value);
@@ -39,19 +42,35 @@ winningSets.addEventListener('change', function () {
 
 
 function updateScores(player, opponent) {
+    player1.currentSet = document.querySelectorAll('.p1currentSet')[setNumber];
+    player2.currentSet = document.querySelectorAll('.p2currentSet')[setNumber];
     if(!isMatchOver) {
+        player.currentSet.classList.remove('hidden');
+        opponent.currentSet.classList.remove('hidden');
+        thCurrentSet[setNumber].classList.remove('hidden');
         player.score ++;
         if ((player.setScore === 6 && opponent.setScore === 6 && player.score >= 7 && opponent.score + 1 < player.score) || (!(player.setScore === 6 && opponent.setScore === 6) && player.score >= 4 && opponent.score + 1 < player.score)) {
             player.setScore ++;
             player.score = 0;
-            player.score = 0;
+            opponent.score = 0;
+            player.currentSet.textContent = player.setScore;
             player.display.textContent = '0';
             opponent.display.textContent = '0';
             if (player.setScore === 6 && opponent.setScore + 1 < player.setScore || player.setScore === 7) {
                 player.totalSets ++;
-                
+                setNumber ++;
+                player.setScore = 0;
+                opponent.setScore = 0;
                 if (player.totalSets === winningGoal) {
                     isMatchOver = true;
+                    player.button.disabled = true;
+                    opponent.button.disabled = true;
+                    player.display.textContent = player.totalSets;
+                    opponent.display.textContent = opponent.totalSets;
+                    player.display.classList.add('bold');
+                    opponent.display.classList.add('bold');
+                    player.playerName.classList.add('is-success');
+                    opponent.playerName.classList.add('is-danger');
                 }
             }
         } else if (player.score === 1) {
@@ -68,12 +87,14 @@ function updateScores(player, opponent) {
             opponent.display.textContent = '';
         } 
     }
+    console.log(setNumber);
 }
 
 player1.button.addEventListener('click', function () {
     updateScores(player1, player2);
     console.log(player1.setScore);
     console.log(player1.totalSets);
+    console.dir(player1.currentSet);
 } )
 
 player2.button.addEventListener('click', function () {

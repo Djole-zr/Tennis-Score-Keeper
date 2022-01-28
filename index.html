@@ -8,17 +8,7 @@
     <title>Tennis Score Keeper</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <style>
-        .edit-icon {
-            width: 25px;
-            height: 25px;
-        }
-
-        .edit {
-            padding: 0 !important;
-            border: none;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -43,12 +33,12 @@
                                     <thead>
                                         <th></th>
                                         <th>Player Name</th>
-                                        <th>Set 1</th>
-                                        <th class="hidden">Set 2</th>
-                                        <th class="hidden">Set 3</th>
-                                        <th class="hidden">Set 4</th>
-                                        <th class="hidden">Set 5</th>
-                                        <th class="hidden">Score</th>
+                                        <th class="currentSet">Set 1</th>
+                                        <th class="currentSet hidden">Set 2</th>
+                                        <th class="currentSet hidden">Set 3</th>
+                                        <th class="currentSet hidden">Set 4</th>
+                                        <th class="currentSet hidden">Set 5</th>
+                                        <th>Score</th>
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -56,11 +46,11 @@
                                                     <ion-icon name="create-outline" class="edit-icon"></ion-icon>
                                                 </button></td>
                                             <td id="name1">Player 1</td>
-                                            <td>0</td>
-                                            <td class="hidden">0</td>
-                                            <td class="hidden">0</td>
-                                            <td class="hidden">0</td>
-                                            <td class="hidden">0</td>
+                                            <td class="p1currentSet">0</td>
+                                            <td class="p1currentSet hidden">0</td>
+                                            <td class="p1currentSet hidden">0</td>
+                                            <td class="p1currentSet hidden">0</td>
+                                            <td class="p1currentSet hidden">0</td>
                                             <td id="p1DisplayScore">0</td>
                                         </tr>
                                         <tr>
@@ -68,11 +58,11 @@
                                                     <ion-icon name="create-outline" class="edit-icon"></ion-icon>
                                                 </button></td>
                                             <td id="name2">Player 2</td>
-                                            <td>0</td>
-                                            <td class="hidden">0</td>
-                                            <td class="hidden">0</td>
-                                            <td class="hidden">0</td>
-                                            <td class="hidden">0</td>
+                                            <td class="p2currentSet">0</td>
+                                            <td class="p2currentSet hidden">0</td>
+                                            <td class="p2currentSet hidden">0</td>
+                                            <td class="p2currentSet hidden">0</td>
+                                            <td class="p2currentSet hidden">0</td>
                                             <td id="p2DisplayScore">0</td>
                                         </tr>
                                     </tbody>
