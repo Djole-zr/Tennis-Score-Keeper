@@ -15,3 +15,13 @@
 .bold {
     font-weight: bold;
 }
+
+footer button {
+    width: calc(100%/3);
+}
+
+@media (max-width: 492px) {
+    footer button {
+        font-size: 12px !important;
+    }
+}
