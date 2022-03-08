@@ -20,8 +20,14 @@ footer button {
     width: calc(100%/3);
 }
 
-@media (max-width: 492px) {
+@media (max-width: 502px) {
+    body {
+        font-size: 10px;
+    }
+
     footer button {
         font-size: 12px !important;
     }
 }
+
+
